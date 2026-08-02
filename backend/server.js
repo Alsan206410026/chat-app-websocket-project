@@ -26,6 +26,7 @@ cron.schedule("0  * * * *", deleteUnverifiedUsers); // Runs every hour
 // Import routes
 const authRoutes = require("./routes/auth.routes");
 const messageRoutes = require("./routes/message.routes");
+const userRoutes = require("./routes/user.routes");
 
 //routes
 
@@ -35,6 +36,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
+app.use("/api/users", userRoutes);
 
 
 const PORT = process.env.PORT || 5002;
