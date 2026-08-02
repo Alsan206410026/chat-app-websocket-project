@@ -66,6 +66,7 @@ Verify your email by entering the OTP in the app.`;
 
       return res.status(200).json({
         message: "A new OTP has been sent to your email.",
+        otp: otp, // For testing purposes, remove in production
       });
     }
 

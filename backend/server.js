@@ -1,8 +1,9 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-
+const cron = require("node-cron");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
 
 dotenv.config();
@@ -14,12 +15,17 @@ connectDB();
 // Middleware to parse JSON request bodies
 app.use(express.json());
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 app.use(cors());
 
+//delete unverified users job
+const deleteUnverifiedUsers = require("./jobs/deleteunverifiedUsers");
+cron.schedule("0  * * * *", deleteUnverifiedUsers); // Runs every hour
 
 // Import routes
 const authRoutes = require("./routes/auth.routes");
+const messageRoutes = require("./routes/message.routes");
 
 //routes
 
@@ -28,6 +34,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/auth", authRoutes);
+app.use("/api/messages", messageRoutes);
 
 
 const PORT = process.env.PORT || 5002;

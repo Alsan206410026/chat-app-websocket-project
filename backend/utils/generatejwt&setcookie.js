@@ -9,7 +9,7 @@ const generateToken = (id, res) => {
         }
     );
 
-    res.cookie("token", token, {
+    res.cookie("jwt", token, {
         httpOnly: true, //prevent client-side JavaScript from accessing the cookie
         secure: false, //set to true if using HTTPS
         sameSite: "strict", //prevent CSRF attacks
