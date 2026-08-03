@@ -185,6 +185,7 @@ const loginUser = async (req, res) => {
       fullName: user.fullName,
       email: user.email,
       phoneNumber: user.phoneNumber,
+      role: user.role,
       token: generateToken(user._id, res), // Generate token and set cookie
     });
   } catch (error) {
